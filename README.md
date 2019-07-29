@@ -1,2 +1,0 @@
-# curiouslab
-My blog hehe
