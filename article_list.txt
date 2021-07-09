@@ -1,0 +1,91 @@
+----------Project----------
+
+01: My first electronic project 555
+02: ultrasound measurement with stm32
+03: AM transmitter / receiver
+04: hydrogen generator - stanley meyer principle
+05: ALF-robot and docking station
+06: automatic component finder
+07: woodworking 1 cubic meter drawer
+08: autonomous robot with ROS
+09: facetracking and edge detection with processing
+10: smart home project
+11: SLAM with LiDAR
+12: CNC machine
+13: Game on FPGA via VGA screen and keyboard
+14: 1000W motor driver
+15: Audio amplifier with transistors
+16: Wireless communication 
+17: audio amplifier with LM...
+18: digital image processing with LabVIEW
+19: DIY tattoo gun
+20: Windows scripting for automatic tasks
+21: Cortex M3 lwIP
+22: remote control of LED strip hacking for buttons
+23: mousticaire magnetique
+24: Android app heartbeat monitor
+25: water consumption monitoring
+26: microstripping or the art of making components with copper
+27: snake with javascript
+28: engraving map on wood
+29: bike turn signal
+30: bike computer :speedometer and distance
+31: Tensorflow
+32: 
+
+----------Chaos------------
+
+01: The 555 chip
+02: books to read
+03: bldc motor
+04: SDR - HDSDR
+05: experimenting with processing
+06: 32 bit ARM controllers VS 8bit controller
+07: interesting websites
+08: AI and the future
+09: repairing screens of phones
+10: work ethics
+11: discipline
+12: science fiction
+13: blinky led
+14: arduino
+15: kicad
+16: peltier element
+17: wireshark
+18: stm32cubeMX
+19: putty
+20: LTSpice
+21: logic analyzer
+22: oscilloscope
+23: FTDI USB to UART
+24: audacity
+25: minify html and unminify
+26: Tor onion web
+27: steering geometry
+28: testing wearable leds
+29: connected people, the future of social media
+30: rockets, fuel and oxidizers
+31: Neural networks
+32: FPGA
+33: microcontroller
+34: memory; flash, rom...
+35: security in the lab
+36: ground and voltage
+37: javascript and debugging on browser
+38: 
+
+----------Teardowns--------
+
+01: crt tv
+02: laptop computer
+03: VHS recorder
+04: usb mouse
+05: hard drive
+06: cd-rom player
+07: rgb led strip controller
+08: remote control proximus
+09: 1080p dashcam
+10: cheap soldering station
+11: iphone 7
+12: 4 channel tektronix scope
+13: 

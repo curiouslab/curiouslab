@@ -1,0 +1,178 @@
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="robotics electronics mechanics building DIY projects project Brussels Robot electronique mecanique robotique projets projet ">
+    <meta name="author" content="SG">
+	
+	<title>Sami's projects | Learn everyday</title>
+	
+	<link href="../../../stylesheets/reset.css" rel="stylesheet" />
+	<link href="../../../stylesheets/style.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+	<link href="../../../images/icons/logo_transparent.png" rel="shortcut icon" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="../../../name_script.js"></script>
+
+
+</head>
+
+<body onload="setTimeout(randword, 0);">
+
+	<!-- ------------------------ HEADER ------------------------ -->
+	<div id="header">
+		<a href="../../../home.html">
+			<img src="../../../images/icons/logo_transparent.png" alt="Logo SG">
+		</a>
+		<div id="title">
+			<a href="../../../home.html">
+				CuriousLab
+			</a>
+		</div>
+	</div>
+
+	<!-- ------------------------ MENU -------------------------- -->
+ 	<div id="menu">
+		<ul>
+			<li><a href="../../../home.html">HOME</a></li>
+			<li><a class="active" href="../projects.html">PROJECTS</a></li>
+			<li><a href="../../chaos/chaos.html">CHAOS</a></li>
+			<li><a href="../../teardowns/teardowns.html">TEARDOWNS</a></li>
+			<li><a href="../../../mylab/mylab.html">MY LAB</a></li>
+			<li><a href="../../../about/about.html">ABOUT ME</a></li>
+		</ul>
+	</div>
+
+
+
+ 	<div id="bloc">
+
+		<!-- ------------------------ SECTION -------------------- -->
+		<div id="section">
+
+			<div id="article-box">
+				<div id="article-title">
+					
+						Project #01 : My first electronic project 555
+					
+					<div id="article-date">
+						24 septembre 2018
+					</div>
+				</div>
+				<div id="article-insidebox">
+					<div id ="article-pic-inside-small">
+						<a>
+							<img src="../../../images/images/todo.png" alt="Image technique">
+						</a>
+					</div>
+					<div id ="article-undertitle"> The Transmitter and Receiver PCB </div>
+					<div id="article-text-inside">
+						We're in the year 2006, I'm 17 years old, I'm studying electronics since only a year and we are asked by the teacher to choose a project. 
+						</br></br>
+						The requirements are easy and basic, we need to make something based on an existing schematic of our choice. The goal is to learn basic schematic drawing, component selection, pcb design, PCB manufacturing and of course soldering.
+						</br></br>
+						The project I chose, was an Infrared light barrier that would buzz when interrupted. This project seems very simple, but I learned lots of electronic concepts during those weeks of building.
+						</br></br></br>
+						<div id= article-title><b><u>Understanding the schematics</u></b></div>
+						</br>
+						The first challenge was to understand the schematic. It's a two part project, first the Transmitter and secondly, the Receiver (let's call them IR-Tx and IR-Rx).
+						</br></br>
+						<div id ="article-pic-inside-big">
+							<a>
+								<img src="infrared-light-barrier-transmitter1.jpg" alt="Image technique">
+							</a>
+						</div>
+						<div id ="article-undertitle"> IR Transmitter based on 555 chip </div>
+						</br>
+						The core component of the transmitter is the famous 555 timer. In this circuit it is used to modulate the infrared signal.
+						The 555 timer is an interesting chip to start learning about the internal working of integrated circuits, I'll probably make an article in the future about it.
+						</br></br>
+						I'll explain this simple modulation circuit by starting from the left.
+						</br></br>
+						The chip IC1 is generating a clock at approx. 700Hz with a duty cycle of 50%. (these values are determined by the capacitor C1 and the resistors R1 and R2).
+						IC2 is generating a clock going from 26kHz to 215kHz (value depends of potentionemer P1).
+						If you look closely, IC1 is driving IC2's reset pin, it means that during the low phases of IC1, IC2 is turned on (because it's an active low input). It's a simple form of signal modulation, where IC2 frequency is the carrier frequency. It means that during the low phases of IC1, the output signal (modulated signal), is clocking at 26kHz.
+						The modulated signal drives the PNP transistor T1 to turn on and off the infrared LED D1.
+						This LED creates a beam of infrared light which the receiver will detect if it's interrupted or not.
+						</br></br>
+						The reason for the signal to be modulated is more subtle than it seems. The frequency of IC2 is there to match the carrier frequency of the receiver, and will depend on the infra red light receiver module that you use. IC1, which is at lower frequency, has another purpose that I'm going to explain later in the receiver part.
+						Another advantage of sending a blockwave to the LED is that we can increase the current through it, and thus the emmiting power of the light.
+						IR LED's used in remote controls can draw more than 1A during a short amount of time, in this application it's drawing a bit over 200mA, which is still a lot for an infrared LED (it couldn't survive continuously this current). According to the datasheet, this LED can withstand 3A of current during 10us (Warning: Absolute Maximum ratings). It means that we could have reduced the resistor value of R5 or increased the voltage of the circuit to extend the range of the beam.
+						</br></br>
+						Capacitor C2 and C4 are just decoupling caps, I'll make an article about this subject in the future (todolist is growing).
+						</br></br>
+						<div id ="article-pic-inside-big">
+							<a>
+								<img src="infrared-light-barrier-receiver1.jpg" alt="Image technique">
+							</a>
+						</div>
+						<div id ="article-undertitle"> IR Receiver based on 555 chip </div>
+						</br>
+						The receiver circuit also uses the 555 timer, let's say that this project is based on that chip !
+						The SFH5110 from OSRAM (component manufacturer specialized in lighting systems) is an infrared light receiver module. This integrated circuit only reacts to infrared light that is oscillated (modulated) at a certain frequency, the version I bought was for 36kHz. It means that his sensitivity for other frequencies drops and is inexistand for continuous light emission (sunlight). That's good for us, since we don't want our receiver to be interferred by other IR light sources.
+						</br></br>
+						When IC1 detects an infrared 36kHz beam, it will pull his pin 1 low such that diode D1 will conduct current (which is limited by R2) and pull the reset pin from IC2 low (active low pin) which will turn off the 555. 
+						When nothing is detected by SFH5110 or the beam is interrupted, the output pin 1 will then turn on and block cuurent from D1 and pull the Reset pin from the 555 high (active low pin), this will turn the output pin 3 on.
+						</br></br>
+						The 555 is used here in a non traditional way, here it acts as a switch (overkill application). It will be ON or OFF depending of the reset pin (NOT-gate).
+						The buzzer is a piezzo based component that has an embedded oscillator. To make it buzz, a constant current needs to be applied, which is provided from the 555's output.
+						</br></br>
+						Conclusion: The circuit turns the buzzer on when the IR beam is interrupted. It's an overkilled application of 555's and other components, it could have been made much simpler, but the goal of this project was to learn new concepts like modulation, timers and driving loads.
+						</br></br></br>
+						<div id= article-title><b><u>Upgrade</u></b></div>
+						</br>
+						When I was done with the project, I had a couple of weeks left before presenting it to the teacher. I thought about upgrading the project a little by using it as a people counter for a room, by counting the times the beam is interrupted at a door's entrance.
+						I used a binary counter from the 7400 series logic chips, than a BCD to 7 segment decoder to display the counter value on a 7 segment display.
+						I don't remember the name of the exact chips I used, at the time I didn't learned yet to document my work.
+						</br></br></br>
+						<div id= article-title><b><u>What I learned</u></b></div>
+						</br>
+						This was my first real project in the electronics field, here some things I learned during those weeks.
+						</br></br>
+						<ul>
+  							<li> - Grab for help when you can't figure it out yourself (also offer help to other people).</li></br>
+  							<li> - Document your work, after a year you forget everything that's not written somewhere.</li></br>
+  							<li> - A project doesn't work from the first time, keep trying in different ways. Experiment !</li></br>
+  							<li> - Organization is key, a project can't be done in one night, some planning is needed.</li></br>
+  							<li> - READ datasheets, and understand what you read. Don't only scroll over the PDF files.</li>
+						</ul> 
+						</br></br>
+						<div id= article-title><b><u>References</u></b></div>
+						</br>
+						Schematic images are from the book 308 Schakelingen by Elektor.
+
+					</div>
+					<div id="article-more">
+						<a href="../projects.html">
+							&#8618 Back
+						</a>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+		<!-- ------------------------ SIDESECTION ---------------- -->
+		<div id="sidesection">
+
+		<p id="stats"></p>
+		
+		</br>
+
+		<p id="randomly"></p>
+
+		</br>
+			
+		</div>
+
+	</div>
+
+	<!-- ------------------------- FOOTER ------------------------ -->
+	<div id="footer">	
+		Copyright &copy 2016-2018 S.G.
+	</div>
+	
+</body>
+
+</html>
