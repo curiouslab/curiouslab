@@ -1,9 +1,20 @@
 <?php
+
 $data = [];
-if (file_exists('data.json')) {
-  $json = file_get_contents('data.json');
-  $data = json_decode($json, true);
+
+try {
+    $db = new PDO('sqlite:erp.db');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $query = $db->query("SELECT * FROM finance_entries ORDER BY date DESC");
+    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    echo "❌ Database error: " . $e->getMessage();
+    $data = [];
 }
+
+
 
 // Filters for the table
 $filterType = $_GET['type'] ?? 'all';
@@ -186,14 +197,16 @@ $filteredData = array_filter($data, function($entry) use ($filterType, $filterMo
           <?php endif; ?>
         </td>
         <td class="d-flex gap-1">
-          <form action="delete.php" method="POST" onsubmit="return confirm('Delete this entry?');">
-            <input type="hidden" name="timestamp" value="<?= strtotime($entry['date']) ?>">
-            <button type="submit" class="btn btn-sm btn-danger">🗑️</button>
-          </form>
-          <form action="edit.php" method="GET">
-            <input type="hidden" name="timestamp" value="<?= strtotime($entry['date']) ?>">
-            <button type="submit" class="btn btn-sm btn-warning">✏️</button>
-          </form>
+<form action="delete.php" method="POST" onsubmit="return confirm('Delete this entry?');">
+  <input type="hidden" name="id" value="<?= htmlspecialchars($entry['id']) ?>">
+  <button type="submit" class="btn btn-sm btn-danger">🗑️</button>
+</form>
+
+<form action="edit.php" method="GET">
+  <input type="hidden" name="id" value="<?= htmlspecialchars($entry['id']) ?>">
+  <button type="submit" class="btn btn-sm btn-warning">✏️</button>
+</form>
+
 		  <button type="button"
         class="btn btn-sm btn-success btn-show-qr"
         data-timestamp="<?= strtotime($entry['date']) ?>">
